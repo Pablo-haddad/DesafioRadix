@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Óleo e Gás</title>
+    <link rel="stylesheet" href="../css/estilo_dash.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--TOPO DA MINHA DASH-->
+    <header class="dashboard-header">
+        <h1>Dashboard Óleo e Gás</h1>
+        <nav class="nav">
+            <button class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
+        </nav>
+    </header>
+
+
+    <!--AQUI É OS CARDS -->
+    <section class="summary-cards">
+        <div class="card">
+            <h2>Total de Equipamentos</h2>
+            <p>2000</p>
+        </div>
+        <div class="card">
+            <h2>Média das Últimas 24h</h2>
+            <p>75.2</p>
+        </div>
+        <div class="card card-alerta" id="card-alerta">
+            <h2>Alertas Ativos</h2>
+            <p>3</p>
+        </div>
+    </section>
+
+    <!-- GRAFICOS  -->
+    <div class="graficos-div">
+        <section class="charts">
+            <div class="chart-container">
+                <h2>Dados dos Sensores - Últimos Dias</h2>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="charts2">
+            <div class="chart-container2">
+                <h2>Dados dos Sensores - Últimos Dias</h2>
+                <div>
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+    const ctx2 = document.getElementById('myChart2');
+
+    // Função para atualizar gráficos
+    function atualizarGraficos() {
+        // Fetch para obter dados de temperatura
+        fetch('/api/sensores/temperatura')
+            .then(response => response.json())
+            .then(data => {
+                // Extrair datas/hora e temperaturas dos dados
+                const labels = data.map(sensor => new Date(sensor.data_hora).toLocaleString()); // Formatar data/hora
+                const temperaturas = data.map(sensor => sensor.temperatura); // Obter temperaturas
+
+                // Atualizando o gráfico de barras
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Temperaturas dos Sensores',
+                            data: temperaturas,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Atualizando o gráfico de linha
+                new Chart(ctx2, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Temperaturas dos Sensores',
+                            data: temperaturas,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao buscar dados:', error));
+    }
+
+    // Chamada inicial
+    atualizarGraficos();
+
+    // Atualiza os gráficos a cada 2 minutos
+    setInterval(atualizarGraficos, 120000);
+</script>
+</html>

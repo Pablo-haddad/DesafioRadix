@@ -1,0 +1,134 @@
+*{
+    font-family:"Bebas Neue", sans-serif;
+}
+body {
+    background: linear-gradient(to bottom, #ffffff, #38260daf);
+    color: #000000;
+    margin: 0;
+    padding: 0;
+}
+/*A PARTE DE CIMA DA MINHA DASH*/
+.dashboard-header {
+    background-color: #38260df5;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav{
+    height: 70px;
+    display: flex;
+    align-items: center;
+
+}
+
+
+.nav .btn-logout {
+    background-color: white;
+    color: #070707;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+/*AQUI ESTÁ OS CARDS*/
+.summary-cards {
+    display: flex;
+    justify-content: flex-end; /* Alinha os cards à direita */
+    gap: 20px; /* Espaçamento entre os cards */
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    flex: 1;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.card p {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+.card-alerta{
+    background-color: red;
+}
+.card-alerta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-alerta:focus {
+    outline: 2px solid #0182DB;
+    outline-offset: 4px;
+}
+
+/*MEU GRAFICO*/
+.graficos-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -45px;
+}
+.chart-container canvas {
+    width: 100% !important; /* Isso garante que o gráfico ocupe a largura total da div */
+    height: 300px !important; /* Ajuste a altura conforme necessário */
+}
+.chart-container2 canvas {
+    width: 100% !important; /* Isso garante que o gráfico ocupe a largura total da div */
+    height: 300px !important; /* Ajuste a altura conforme necessário */
+}
+.charts {
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+
+}
+
+.chart-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/*GRAFICO 2*/
+.charts2 {
+    padding: 40px;
+    margin-top: 20px;
+    display: flex;
+}
+.chart-container2 {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+/*AQUI EU AINDA TENHO QUE VER COMO VOU USAR*/
+.data-table {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
